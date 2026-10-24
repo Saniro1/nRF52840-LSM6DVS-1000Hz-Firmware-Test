@@ -48,6 +48,12 @@ Rebuild: `make_axis_variant.py in out "+1,-2,-0" <deadzone_lsb> <gain_quarters>`
 | `CURRENT_1_gyro-accel-fix26-handheld-roll.uf2` | pitch (up/down) as before; **roll drives the horizontal (left/right) channel**; 2.0x gain, 0.25 deg/s soft deadzone. Report `(+Gy, -Gx, +Gz)`. Try first. |
 | `CURRENT_1_gyro-accel-fix26-handheld-roll-alt.uf2` | same but roll direction reversed (`(+Gy, +Gx, -Gz)`); use if rolling right moves the cursor left. |
 
+## fix27 - handheld roll, pitch inverted
+| file | use |
+|---|---|
+| `CURRENT_1_gyro-accel-fix27-handheld-roll-pitch-inverted.uf2` | = fix26-handheld-roll with only pitch (up/down) inverted. Report `(-Gy, -Gx, +Gz)`. |
+| `CURRENT_1_gyro-accel-fix27-handheld-roll-alt-pitch-inverted.uf2` | = fix26-handheld-roll-alt with only pitch inverted. Report `(-Gy, +Gx, -Gz)`. |
+
 Soft deadzone, per gyro axis, applied in the firmware before the report is sent: `|v| <= T` -> 0, larger motion is reduced by T so there is no jump at the edge. Accelerometer is untouched. Rebuild: `make_axis_variant.py in out "+1,-2,-0" <T in LSB, 16 LSB = 1 dps>`.
 
 Notes
