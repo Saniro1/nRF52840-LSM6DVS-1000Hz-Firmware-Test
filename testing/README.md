@@ -15,6 +15,8 @@ Flash: double-tap reset → drag the .uf2 onto the drive. Recovery: double-tap r
 | `CURRENT_1_gyro-accel-fix20-deadzone-0.25dps.uf2` | fix19 + soft gyro deadzone of 0.25 °/s (4 LSB). Smallest step. |
 | `CURRENT_1_gyro-accel-fix20-deadzone-0.5dps.uf2` | fix19 + soft gyro deadzone of 0.5 °/s (8 LSB). **Try this first.** |
 | `CURRENT_1_gyro-accel-fix20-deadzone-1.0dps.uf2` | fix19 + soft gyro deadzone of 1.0 °/s (16 LSB). Use if 0.5 still drifts. |
+| `CURRENT_1_gyro-accel-fix21-normal.uf2` | **Chosen build, USB-C facing UP.** Identical to fix20 with the 1.0 °/s deadzone. Report `(+Gy, -Gz, -Gx)`. |
+| `CURRENT_1_gyro-accel-fix21-inverted.uf2` | Same build for the board turned 180° so USB-C faces DOWN (rotated in its own plane, 180° about the sensor X axis). Report `(-Gy, +Gz, -Gx)`. |
 
 Soft deadzone, per gyro axis, applied in the firmware before the report is sent: `|v| <= T` -> 0, larger motion is reduced by T so there is no jump at the edge. Accelerometer is untouched. Rebuild: `make_axis_variant.py in out "+1,-2,-0" <T in LSB, 16 LSB = 1 dps>`.
 
