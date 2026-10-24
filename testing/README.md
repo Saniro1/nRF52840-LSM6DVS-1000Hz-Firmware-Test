@@ -54,6 +54,14 @@ Rebuild: `make_axis_variant.py in out "+1,-2,-0" <deadzone_lsb> <gain_quarters>`
 | `CURRENT_1_gyro-accel-fix27-handheld-roll-pitch-inverted.uf2` | = fix26-handheld-roll with only pitch (up/down) inverted. Report `(-Gy, -Gx, +Gz)`. |
 | `CURRENT_1_gyro-accel-fix27-handheld-roll-alt-pitch-inverted.uf2` | = fix26-handheld-roll-alt with only pitch inverted. Report `(-Gy, +Gx, -Gz)`. |
 
+## fix28 - handheld (roll aim, pitch inverted, 2.0x gain) with a bigger deadzone
+| file | deadzone |
+|---|---|
+| `CURRENT_1_gyro-accel-fix28-handheld-deadzone-0.5dps.uf2` | 0.5 deg/s (1.0 deg/s effective after the 2x gain) |
+| `CURRENT_1_gyro-accel-fix28-handheld-deadzone-1.0dps.uf2` | 1.0 deg/s (2.0 effective) |
+| `CURRENT_1_gyro-accel-fix28-handheld-deadzone-1.5dps.uf2` | 1.5 deg/s (3.0 effective) |
+Same as fix27-handheld-roll-pitch-inverted except the deadzone (was 0.25).
+
 Soft deadzone, per gyro axis, applied in the firmware before the report is sent: `|v| <= T` -> 0, larger motion is reduced by T so there is no jump at the edge. Accelerometer is untouched. Rebuild: `make_axis_variant.py in out "+1,-2,-0" <T in LSB, 16 LSB = 1 dps>`.
 
 Notes
