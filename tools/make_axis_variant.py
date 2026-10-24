@@ -7,7 +7,10 @@ the sensor axis 0/1/2 (Gx,Gy,Gz) it is taken from.  The SAME mapping is applied 
   fix18      "+1,-2,-0"   (yaw on Gz, roll on Gx)
   fix18-alt  "+1,+2,+0"   (same axes, yaw/roll signs flipped)
 
-usage: make_axis_variant.py in.uf2 out.uf2 "+1,-2,-0" [deadzone_lsb]
+usage: make_axis_variant.py in.uf2 out.uf2 "+1,-2,-0" [deadzone_lsb] [gain_quarters]
+
+Optional gyro gain (after the deadzone, gyro only): gain_quarters/4, e.g. 8 = 2.0x, 6 = 1.5x (default 4 = 1.0x, none).
+Result is saturated to int16.
 
 Optional soft gyro deadzone (gyro only, per axis, 16 LSB = 1 dps): |v|<=T -> 0, else v -> v -/+ T.
 """
@@ -23,7 +26,7 @@ def enc_bw(src, dst):
     return struct.pack('<HH', 0xF000 | (s << 10) | ((off >> 12) & 0x3FF),
                        0x9000 | (j1 << 13) | (j2 << 11) | ((off >> 1) & 0x7FF))
 
-def cave2(mapping, dz=0):
+def cave2(mapping, dz=0, gain=4):
     h = lambda *w: struct.pack('<%dH' % len(w), *w)
     strb = lambda rt, off: 0x7000 | (off << 6) | (4 << 3) | rt   # strb rt,[r4,#off]
     out = b''
@@ -39,6 +42,12 @@ def cave2(mapping, dz=0):
                      0x3200 | dz,   # L1: adds r2,r2,#T   (N set if v < -T)
                      0xD400,        # bmi  done
                      0x2200)        # movs r2,#0
+        if gain != 4:
+            assert 0 < gain < 256
+            out += h(0xF04F, 0x0C00 | gain,   # mov.w ip,#gain
+                     0xFB02, 0xF20C,          # mul   r2,r2,ip
+                     0x1092,                  # asrs  r2,r2,#2
+                     0xF302, 0x020F)          # ssat  r2,#16,r2
         out += h(strb(2, 16 + 2 * k), strb(3, 22 + 2 * k))
         out += h(0xF3C2, 0x2207, 0xF3C3, 0x2307)                      # ubfx r2/r3,#8,#8
         if k == 2:
@@ -54,7 +63,7 @@ def parse(spec):
     assert sorted(s for _, s in m) == [0, 1, 2], 'each sensor axis exactly once'
     return m
 
-def main(src, dst, spec, dz=0):
+def main(src, dst, spec, dz=0, gain=4):
     d = bytearray(open(src, 'rb').read())
     blocks = [(o,) + struct.unpack_from('<II', d, o + 12) for o in range(0, len(d), 512)]
     def find(a, n):
@@ -64,10 +73,12 @@ def main(src, dst, spec, dz=0):
     for a, v in EXPECT_POOL.items():
         if struct.unpack_from('<I', d, find(a, 4))[0] != v: sys.exit('input is not fix16/17 (pool)')
     if bytes(d[find(HOOK, 4):find(HOOK, 4) + 4]) != EXPECT_HOOK: sys.exit('input is not fix16/17 (hook)')
-    code = cave2(parse(spec), int(dz)); code += enc_bw(CAVE + len(code), RET)
-    p = find(CAVE, len(code)); d[p:p + len(code)] = code
-    open(dst, 'wb').write(d); print('mapping', spec, 'deadzone', dz, 'cave bytes', len(code))
+    code = cave2(parse(spec), int(dz), int(gain)); code += enc_bw(CAVE + len(code), RET)
+    for i in range(0, len(code), 4):               # may span several 256-byte UF2 payloads
+        chunk = code[i:i + 4]
+        q = find(CAVE + i, len(chunk)); d[q:q + len(chunk)] = chunk
+    open(dst, 'wb').write(d); print('mapping', spec, 'deadzone', dz, 'gain/4', gain, 'cave bytes', len(code))
 
 if __name__ == '__main__':
-    if len(sys.argv) not in (4, 5): sys.exit(__doc__)
+    if len(sys.argv) not in (4, 5, 6): sys.exit(__doc__)
     main(*sys.argv[1:])

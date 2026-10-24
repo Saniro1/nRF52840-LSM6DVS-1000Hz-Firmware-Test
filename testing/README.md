@@ -30,6 +30,18 @@ Flash: double-tap reset → drag the .uf2 onto the drive. Recovery: double-tap r
 
 **Current good builds: `fix23-normal-*` (USB-C up) and `fix23-inverted-*` (USB-C down), in 0.25 / 0.5 / 1.0 °/s deadzone.** fix24 (inverted with roll flipped) was tested and rejected, so it was removed. fix21/fix22 inverted are superseded by fix23.
 
+## fix25 - the three final builds (all 0.25 deg/s soft deadzone)
+| file | use |
+|---|---|
+| `CURRENT_1_gyro-accel-fix25-normal.uf2` | controller, USB-C UP (= fix23-normal-0.25) |
+| `CURRENT_1_gyro-accel-fix25-inverted.uf2` | controller, USB-C DOWN (= fix23-inverted-0.25) |
+| `CURRENT_1_gyro-accel-fix25-handheld.uf2` | normal axes + **2.0x gyro gain** for handhelds (Xbox ROG Ally X) |
+| `handheld-extra/...-handheld-1.5x.uf2`, `...-3x.uf2` | same, 1.5x / 3x gain if 2x is too little/much |
+
+Gain is applied after the deadzone (so the deadzone stays 0.25 deg/s in real motion), per axis, gyro only, saturating at int16.
+No low-pass filter in firmware (needs RAM for state; none known to be free). For extra smoothing use JoyShockMapper `GYRO_SMOOTH_THRESHOLD` / `GYRO_SMOOTH_TIME`.
+Rebuild: `make_axis_variant.py in out "+1,-2,-0" <deadzone_lsb> <gain_quarters>` (8 = 2.0x).
+
 Soft deadzone, per gyro axis, applied in the firmware before the report is sent: `|v| <= T` -> 0, larger motion is reduced by T so there is no jump at the edge. Accelerometer is untouched. Rebuild: `make_axis_variant.py in out "+1,-2,-0" <T in LSB, 16 LSB = 1 dps>`.
 
 Notes
