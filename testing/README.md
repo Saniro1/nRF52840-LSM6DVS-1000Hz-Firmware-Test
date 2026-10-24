@@ -27,9 +27,8 @@ Flash: double-tap reset → drag the .uf2 onto the drive. Recovery: double-tap r
 | `CURRENT_1_gyro-accel-fix23-inverted-deadzone-0.5dps.uf2` | USB-C DOWN (inverted), soft gyro deadzone 0.5 °/s. |
 | `CURRENT_1_gyro-accel-fix23-inverted-deadzone-1.0dps.uf2` | USB-C DOWN (inverted), soft gyro deadzone 1.0 °/s. |
 
-| `CURRENT_1_gyro-accel-fix24-inverted-deadzone-0.25dps.uf2` | **USB-C DOWN**, roll direction corrected after fix23 test (pitch and yaw unchanged). Report `(-Gy, -Gz, -Gx)`, deadzone 0.25 °/s. Use these instead of fix21-23 inverted. Normal files: fix23-normal. |
-| `CURRENT_1_gyro-accel-fix24-inverted-deadzone-0.5dps.uf2` | **USB-C DOWN**, roll direction corrected after fix23 test (pitch and yaw unchanged). Report `(-Gy, -Gz, -Gx)`, deadzone 0.5 °/s. Use these instead of fix21-23 inverted. Normal files: fix23-normal. |
-| `CURRENT_1_gyro-accel-fix24-inverted-deadzone-1.0dps.uf2` | **USB-C DOWN**, roll direction corrected after fix23 test (pitch and yaw unchanged). Report `(-Gy, -Gz, -Gx)`, deadzone 1.0 °/s. Use these instead of fix21-23 inverted. Normal files: fix23-normal. |
+
+**Current good builds: `fix23-normal-*` (USB-C up) and `fix23-inverted-*` (USB-C down), in 0.25 / 0.5 / 1.0 °/s deadzone.** fix24 (inverted with roll flipped) was tested and rejected, so it was removed. fix21/fix22 inverted are superseded by fix23.
 
 Soft deadzone, per gyro axis, applied in the firmware before the report is sent: `|v| <= T` -> 0, larger motion is reduced by T so there is no jump at the edge. Accelerometer is untouched. Rebuild: `make_axis_variant.py in out "+1,-2,-0" <T in LSB, 16 LSB = 1 dps>`.
 
