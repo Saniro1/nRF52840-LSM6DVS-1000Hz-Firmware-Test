@@ -42,6 +42,12 @@ Gain is applied after the deadzone (so the deadzone stays 0.25 deg/s in real mot
 No low-pass filter in firmware (needs RAM for state; none known to be free). For extra smoothing use JoyShockMapper `GYRO_SMOOTH_THRESHOLD` / `GYRO_SMOOTH_TIME`.
 Rebuild: `make_axis_variant.py in out "+1,-2,-0" <deadzone_lsb> <gain_quarters>` (8 = 2.0x).
 
+## fix26 - handheld, aim sideways by ROLLING
+| file | use |
+|---|---|
+| `CURRENT_1_gyro-accel-fix26-handheld-roll.uf2` | pitch (up/down) as before; **roll drives the horizontal (left/right) channel**; 2.0x gain, 0.25 deg/s soft deadzone. Report `(+Gy, -Gx, +Gz)`. Try first. |
+| `CURRENT_1_gyro-accel-fix26-handheld-roll-alt.uf2` | same but roll direction reversed (`(+Gy, +Gx, -Gz)`); use if rolling right moves the cursor left. |
+
 Soft deadzone, per gyro axis, applied in the firmware before the report is sent: `|v| <= T` -> 0, larger motion is reduced by T so there is no jump at the edge. Accelerometer is untouched. Rebuild: `make_axis_variant.py in out "+1,-2,-0" <T in LSB, 16 LSB = 1 dps>`.
 
 Notes
