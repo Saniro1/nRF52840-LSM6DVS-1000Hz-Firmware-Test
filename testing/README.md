@@ -20,6 +20,13 @@ Flash: double-tap reset → drag the .uf2 onto the drive. Recovery: double-tap r
 | `CURRENT_1_gyro-accel-fix22-normal.uf2` | Same as fix21-normal (USB-C UP, 1.0 °/s deadzone). |
 | `CURRENT_1_gyro-accel-fix22-inverted.uf2` | **USB-C DOWN**, corrected after testing fix21-inverted (pitch was right, left/right reversed). Report `(-Gy, -Gz, +Gx)`, i.e. 180° about the sensor Z axis. Use this one instead of fix21-inverted. |
 
+| `CURRENT_1_gyro-accel-fix23-normal-deadzone-0.25dps.uf2` | USB-C UP (normal), soft gyro deadzone 0.25 °/s. |
+| `CURRENT_1_gyro-accel-fix23-normal-deadzone-0.5dps.uf2` | USB-C UP (normal), soft gyro deadzone 0.5 °/s. |
+| `CURRENT_1_gyro-accel-fix23-normal-deadzone-1.0dps.uf2` | USB-C UP (normal), soft gyro deadzone 1.0 °/s. |
+| `CURRENT_1_gyro-accel-fix23-inverted-deadzone-0.25dps.uf2` | USB-C DOWN (inverted), soft gyro deadzone 0.25 °/s. |
+| `CURRENT_1_gyro-accel-fix23-inverted-deadzone-0.5dps.uf2` | USB-C DOWN (inverted), soft gyro deadzone 0.5 °/s. |
+| `CURRENT_1_gyro-accel-fix23-inverted-deadzone-1.0dps.uf2` | USB-C DOWN (inverted), soft gyro deadzone 1.0 °/s. |
+
 Soft deadzone, per gyro axis, applied in the firmware before the report is sent: `|v| <= T` -> 0, larger motion is reduced by T so there is no jump at the edge. Accelerometer is untouched. Rebuild: `make_axis_variant.py in out "+1,-2,-0" <T in LSB, 16 LSB = 1 dps>`.
 
 Notes
