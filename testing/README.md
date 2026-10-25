@@ -90,3 +90,11 @@ Notes
 Report thread already sleeps 33 ticks of 32768 Hz (~1.007 ms) between reports; fix19 makes the USB side explicit (bInterval=1).
 Sensor ODR is a runtime setting: in the serial shell run `read_config sensor_gyro_odr`, then `write_config sensor_gyro_odr 1000`,
 `write_config sensor_accel_odr 1000`, `reboot` (driver rounds up to the next LSM6DSV ODR, 1920 Hz).
+
+## fix30 - DS4 handheld, bigger deadzone, less sensitive
+Same as fix29-ds4-handheld (roll aim, pitch inverted) but deadzone **0.5 deg/s** (applied before gain) and lower gain.
+| file | gain |
+|---|---|
+| `CURRENT_1_gyro-accel-fix30-ds4-handheld-dz0.5-gain1.5x.uf2` | 1.5x (main test; was 2x) |
+| `handheld-ds4-extra/...-gain1.25x.uf2` | 1.25x |
+| `handheld-ds4-extra/...-gain1.0x.uf2` | 1.0x (same sensitivity as the normal build) |
