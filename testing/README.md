@@ -62,6 +62,20 @@ Rebuild: `make_axis_variant.py in out "+1,-2,-0" <deadzone_lsb> <gain_quarters>`
 | `CURRENT_1_gyro-accel-fix28-handheld-deadzone-1.5dps.uf2` | 1.5 deg/s (3.0 effective) |
 Same as fix27-handheld-roll-pitch-inverted except the deadzone (was 0.25).
 
+## fix29 - DualShock 4 identity (for JSM_custom_curve / any DS4-only tool)
+USB ID changed from DualSense (054C:0CE6) to **DualShock 4 (054C:05C4)** and the report is now a real DS4 USB input report
+(report id 1: gyro bytes 13-18, accel 19-24, sticks centred, hat released, no touch). Same sensor mapping, deadzone and gain as before.
+| file | = same behaviour as | use |
+|---|---|---|
+| `CURRENT_1_gyro-accel-fix29-ds4-normal.uf2` | fix25-normal (0.25 deg/s) | USB-C UP |
+| `CURRENT_1_gyro-accel-fix29-ds4-inverted.uf2` | fix25-inverted (0.25 deg/s) | USB-C DOWN |
+| `CURRENT_1_gyro-accel-fix29-ds4-handheld.uf2` | fix27 (roll aim, pitch inverted, 2x gain) with the deadzone back to **0.25 deg/s** | handheld (Xbox ROG Ally X) |
+
+The DualSense builds (fix25/fix27) are unchanged and still available.
+Tools: `tools/make_ds4.py` (builder, needs an ARM assembler) and `tools/sim_cave.py` (runs the patched code in a tiny Thumb-2 interpreter
+and checks every report byte against the DS4 offsets JoyShockLibrary reads). JSM_custom_curve is a JoyShockMapper fork (curves, One Euro
+filter, smoothing live on the PC); it just needs a DS4-type device. Use its **Legacy** backend (JoyShockLibrary) first; the SDL backend was not verified.
+
 Soft deadzone, per gyro axis, applied in the firmware before the report is sent: `|v| <= T` -> 0, larger motion is reduced by T so there is no jump at the edge. Accelerometer is untouched. Rebuild: `make_axis_variant.py in out "+1,-2,-0" <T in LSB, 16 LSB = 1 dps>`.
 
 Notes
