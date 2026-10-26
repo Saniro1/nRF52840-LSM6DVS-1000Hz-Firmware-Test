@@ -102,3 +102,8 @@ Same as fix29-ds4-handheld (roll aim, pitch inverted) but deadzone **0.5 deg/s**
 ## fix32 - no "Expected N timesteps" warning (test)
 `CURRENT_1_gyro-accel-fix32-ds4-handheld-dz0.5-gain1.0x-nowarn.uf2` = fix30 handheld 1.0x with the harmless PuTTY log line
 `sensor: Expected N timesteps, got M` silenced (`tools/patch_nowarn.py`: the `beq.n` at 0x5034 becomes `b.n`, one byte). Nothing else changes.
+Same one-byte change on the other two DS4 builds:
+| file | = fix29 behaviour |
+|---|---|
+| `CURRENT_1_gyro-accel-fix32-ds4-normal-nowarn.uf2` | fix29-ds4-normal (0.25 deg/s, 1x) |
+| `CURRENT_1_gyro-accel-fix32-ds4-inverted-nowarn.uf2` | fix29-ds4-inverted (0.25 deg/s, 1x) |
