@@ -98,3 +98,8 @@ Same as fix29-ds4-handheld (roll aim, pitch inverted) but deadzone **0.5 deg/s**
 | `CURRENT_1_gyro-accel-fix30-ds4-handheld-dz0.5-gain1.5x.uf2` | 1.5x (main test; was 2x) |
 | `handheld-ds4-extra/...-gain1.25x.uf2` | 1.25x |
 | `handheld-ds4-extra/...-gain1.0x.uf2` | 1.0x (same sensitivity as the normal build) |
+
+## fix31 - 500 Hz USB polling (test)
+`CURRENT_1_gyro-accel-fix31-ds4-handheld-dz0.5-gain1.0x-500hz.uf2` = fix30 handheld (0.5 dps deadzone, 1.0x gain) with the USB poll interval
+raised from 1 ms to 2 ms (`tools/patch_poll.py ... 2`: bInterval at 0x3A789 and the report thread sleep at 0x991C, 33 -> 65 ticks).
+Only those two bytes differ from fix30. This changes how often reports reach the PC, not the sensor rate (set with `write_config`).
