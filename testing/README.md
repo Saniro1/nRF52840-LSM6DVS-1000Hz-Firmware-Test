@@ -107,3 +107,7 @@ Same one-byte change on the other two DS4 builds:
 |---|---|
 | `CURRENT_1_gyro-accel-fix32-ds4-normal-nowarn.uf2` | fix29-ds4-normal (0.25 deg/s, 1x) |
 | `CURRENT_1_gyro-accel-fix32-ds4-inverted-nowarn.uf2` | fix29-ds4-inverted (0.25 deg/s, 1x) |
+
+## fix33 - handheld with left/right and up/down both flipped
+`CURRENT_1_gyro-accel-fix33-ds4-handheld-flipped-dz0.5-gain1.0x-nowarn.uf2`: same as the fix32 handheld build (0.5 deg/s deadzone, 1x gain,
+timestep warning hidden) but the two aiming axes are reversed. Mapping `-1,-0,+2` -> `+1,+0,+2` (pitch slot and roll slot both negated; third axis unchanged).
