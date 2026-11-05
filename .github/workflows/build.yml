@@ -1,7 +1,7 @@
 name: Build and emulate three DS4 test firmwares
 on:
   push:
-    branches: [main, jsm-calibration]
+    branches: [main, jsm-calibration, ds4-fix35]
     paths: ['tools/**', 'tests/**', '.github/workflows/build.yml']
   pull_request:
   workflow_dispatch:
