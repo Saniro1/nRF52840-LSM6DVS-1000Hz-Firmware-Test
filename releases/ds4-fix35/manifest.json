@@ -1,0 +1,39 @@
+{
+  "base_sha256": "ca788b4a19e95cceaf0e210c18ba4675904f3bf140129ce91b06c3c4905dc45e",
+  "hardware_validated": false,
+  "profiles": {
+    "normal": {
+      "file": "fix35-ds4-normal.uf2",
+      "mapping": "+1,-2,-0",
+      "deadzone_dps": 0.25,
+      "gain": 1,
+      "cave_bytes": 538,
+      "sha256": "1cd34b790bc0b9cd39f981fa6ed752d6fea9ca8c4568f62eece84a9e76c7f6f7",
+      "usb_interval_ms": 1,
+      "report_retry_ticks": 16,
+      "active_sensor_interval_ms": 1
+    },
+    "inverted": {
+      "file": "fix35-ds4-inverted.uf2",
+      "mapping": "-1,-2,+0",
+      "deadzone_dps": 0.25,
+      "gain": 1,
+      "cave_bytes": 538,
+      "sha256": "d71d8c803bdc7fa6d17a3d5eb626ca9adca37bd6126475b6a06d779dc82ccd37",
+      "usb_interval_ms": 1,
+      "report_retry_ticks": 16,
+      "active_sensor_interval_ms": 1
+    },
+    "handheld": {
+      "file": "fix35-ds4-handheld.uf2",
+      "mapping": "+1,+0,-2",
+      "deadzone_dps": 0.25,
+      "gain": 1,
+      "cave_bytes": 534,
+      "sha256": "ada1175bf99789d450675f12989df89bf6e3a5bb17980308cbfa6181e0f199c6",
+      "usb_interval_ms": 1,
+      "report_retry_ticks": 16,
+      "active_sensor_interval_ms": 1
+    }
+  }
+}

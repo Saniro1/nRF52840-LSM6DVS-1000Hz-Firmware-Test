@@ -1,3 +1,22 @@
+# Test repository: three DS4 firmware variants
+
+This repository carries forward the corrected source repository's **jsm-calibration**
+branch through fix34. The new experimental **fix35** normal, inverted and handheld
+UF2s are in [releases/ds4-fix35](releases/ds4-fix35/).
+
+Read [the findings, calibration steps, build instructions and hardware test plan](docs/DS4_FIX35.md)
+before flashing. ARM emulation passes; physical calibration and a sustained 1000 Hz
+USB report rate still require hardware measurement. These are binary patches to
+the existing SlimeVR firmware, not a complete source rebuild.
+
+The Arduino sketch and web-demo firmware generators below are historical material;
+they are not the supported build path for this pre-soldered board. Use the fix35
+workflow and keep your known working recovery UF2.
+
+---
+
+## Historical Arduino project documentation
+
 # nRF52840 + LSM6DSV 1000 Hz Gyro Firmware (Smol Slime)
 
 Ultra-low-latency, high-precision motion controller firmware for **Smol Slime / SuperMini nRF52840** (Pro-Micro footprint) paired with a single **STMicroelectronics LSM6DSV** 6-axis IMU. Designed for seamless plug-and-play gyro aiming with **JoyShockMapper**.

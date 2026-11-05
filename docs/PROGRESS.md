@@ -28,3 +28,14 @@ See `docs/STEP1_ANALYSIS.md` and `docs/STEP2_ROOT_CAUSE.md`.
 `testing/` holds fix16 (from user), fix17 and fix17-alt (IMU rotated 90° about yaw). Built by `tools/make_fix17.py`. Needs hardware test.
 
 fix17 test result: pitch inverted, yaw dead, roll ok (JSM LOCAL ignores Z slot) -> axes re-derived; fix18 / fix18-alt added (`tools/make_axis_variant.py`).
+
+
+## Test repository follow-up: fix35
+
+Imported the branch through ef47e4c into nRF52840-LSM6DVS-1000Hz-Firmware-Test.
+Added guarded builds for normal/inverted/handheld, DS4 timestamp and scale corrections,
+saturation, handedness correction for handheld, 1ms active sensor batching and faster
+USB queue retries. ARM emulation and capture-analysis tests pass locally. Existing
+calibration machinery is retained; new gyro bias algorithms/source rebuild remain
+unfinished. Hardware calibration and measured 1000Hz throughput are pending.
+See [DS4_FIX35.md](DS4_FIX35.md) for evidence and limitations.

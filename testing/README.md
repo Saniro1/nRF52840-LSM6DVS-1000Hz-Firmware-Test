@@ -1,3 +1,7 @@
+> New Test-repository builds: see [fix35 documentation](../docs/DS4_FIX35.md)
+> and [three experimental UF2s](../releases/ds4-fix35/). The entries below record
+> earlier testing; "current good" and "final" refer to that historical stage.
+
 # testing/ – experimental UF2 builds (Smol Slime, DualSense-emulating SlimeVR build)
 
 Flash: double-tap reset → drag the .uf2 onto the drive. Recovery: double-tap reset and flash
