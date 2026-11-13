@@ -122,3 +122,6 @@ timestep warning hidden) but the two aiming axes are reversed. Mapping `-1,-0,+2
 Fix36 diagnostic builds and physical A/B instructions: [DS4_FIX36](../docs/DS4_FIX36.md).
 These restore historical timing and SDL nominal gyro units; they are not verified
 1000 Hz or calibration fixes.
+
+Fix37 diagnostic builds: [FIFO error and coherent sensor handoff repair](../docs/DS4_FIX37.md).
+No stationary-noise, calibration or 1000 Hz success is claimed.

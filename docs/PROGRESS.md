@@ -45,3 +45,10 @@ See [DS4_FIX35.md](DS4_FIX35.md) for evidence and limitations.
 See DS4_FIX36.md for the SDL unit discrepancy, descriptor feature gap, clock/ABI
 and shared-buffer audit, conservative three-variant diagnostic builds and open
 hardware requirements. No reset/noise root cause or 1000 Hz result is claimed.
+
+## Fix37 continued independent repair
+
+Recovered upstream reference cbfff16ebed1659d4c0e9f361ded0030fb66855a and matched
+compiled LSM6DSV FIFO paths. Added guarded rejection of failed FIFO reads and
+coherent converter publication/report snapshots. See DS4_FIX37.md for executed
+failure-injection tests, limitations and recovery. Physical noise remains unverified.
