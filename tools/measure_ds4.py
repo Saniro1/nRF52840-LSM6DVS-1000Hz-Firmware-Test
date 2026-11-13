@@ -18,7 +18,7 @@ def decode(packet):
     if len(packet)!=64 or packet[0]!=1: raise ValueError('Expected a 64-byte DS4 USB report 1')
     if packet[31]&4: raise ValueError('DS4 reports a disconnected controller')
     return {'counter':packet[7]>>2,'timestamp':struct.unpack_from('<H',packet,10)[0],
-            'gyro':[v*2000/32767 for v in struct.unpack_from('<3h',packet,13)],
+            'gyro':[v/16 for v in struct.unpack_from('<3h',packet,13)],
             'accel':[v/8192 for v in struct.unpack_from('<3h',packet,19)]}
 
 
@@ -37,6 +37,9 @@ def summary(rows):
             'gyro_mean_dps':[statistics.mean(p['gyro'][i] for p in packets) for i in range(3)],
             'gyro_stddev_dps':[statistics.pstdev(p['gyro'][i] for p in packets) for i in range(3)],
             'gravity_mean_g':statistics.mean(gravity),
+            'accel_mean_g':[statistics.mean(p['accel'][i] for p in packets) for i in range(3)],
+            'accel_stddev_g':[statistics.pstdev(p['accel'][i] for p in packets) for i in range(3)],
+            'accel_peak_to_peak_g':[max(p['accel'][i] for p in packets)-min(p['accel'][i] for p in packets) for i in range(3)],
             'timestamp_changes':sum(a['timestamp']!=b['timestamp'] for a,b in zip(packets,packets[1:])),
             'motion_changes':sum(a['gyro']!=b['gyro'] or a['accel']!=b['accel'] for a,b in zip(packets,packets[1:])),
             'counter_discontinuities':sum(((b['counter']-a['counter'])&63)!=1 for a,b in zip(packets,packets[1:])),
@@ -61,7 +64,7 @@ def main():
         return
     if a.device is None or not 0<=a.device<len(devices):p.error('Use --list, then select --device INDEX explicitly')
     if not 0<a.seconds<=3600:p.error('--seconds must be in (0,3600]')
-    rows=[]; invalid=0
+    rows=[]; invalid=0; timeouts=0; read_error=None
     device=hid.device();device.open_path(devices[a.device]['path'])
     try:
         # Discard preexisting queued reports before beginning the timed run.
@@ -71,9 +74,15 @@ def main():
         device.set_nonblocking(0)
         end=time.perf_counter()+a.seconds
         while time.perf_counter()<end:
-            raw=bytes(device.read(64,100))
+            try:
+                raw=bytes(device.read(64,100))
+            except OSError as error:
+                read_error=str(error)
+                break
             now=time.perf_counter_ns()
-            if not raw:continue
+            if not raw:
+                timeouts+=1
+                continue
             try:decode(raw)
             except ValueError:invalid+=1;continue
             rows.append((now,raw))
@@ -83,8 +92,12 @@ def main():
             w=csv.writer(f);w.writerow(['arrival_ns','report_hex'])
             w.writerows((t,b.hex()) for t,b in rows)
     try:result=summary(rows)
-    except ValueError as e:p.exit(1,str(e)+'\n')
+    except ValueError as e:
+        print(json.dumps({'error':str(e),'read_error':read_error,'timeouts':timeouts,'reports':len(rows)},indent=2))
+        return
     result['invalid_reports']=invalid
+    result['read_error']=read_error
+    result['read_timeouts']=timeouts
     print(json.dumps(result,indent=2))
 
 if __name__=='__main__':main()

@@ -1,0 +1,42 @@
+{
+  "base_sha256": "ca788b4a19e95cceaf0e210c18ba4675904f3bf140129ce91b06c3c4905dc45e",
+  "hardware_validated": false,
+  "profiles": {
+    "normal": {
+      "file": "fix36-ds4-normal.uf2",
+      "mapping": "+1,-2,-0",
+      "deadzone_dps": 0,
+      "gain": 1,
+      "cave_bytes": 490,
+      "sha256": "71ec2bdc3c658417ba6942193c623176389b9344b781095b5bfe2cdb4e9fd94e",
+      "usb_interval_ms": 1,
+      "report_retry_ticks": 33,
+      "active_sensor_interval_ms": 6,
+      "gyro_counts_per_dps": 16
+    },
+    "inverted": {
+      "file": "fix36-ds4-inverted.uf2",
+      "mapping": "-1,-2,+0",
+      "deadzone_dps": 0,
+      "gain": 1,
+      "cave_bytes": 490,
+      "sha256": "ffde4147e7ba9d36a39ae91f8e44fcdb03371c30b99f5c817bc733869cdd93b5",
+      "usb_interval_ms": 1,
+      "report_retry_ticks": 33,
+      "active_sensor_interval_ms": 6,
+      "gyro_counts_per_dps": 16
+    },
+    "handheld": {
+      "file": "fix36-ds4-handheld.uf2",
+      "mapping": "+1,+0,-2",
+      "deadzone_dps": 0,
+      "gain": 1,
+      "cave_bytes": 486,
+      "sha256": "8daa7680e6bdde3c93c542b565e1ff96df261ac035641d8de81b0bd0ce0f8634",
+      "usb_interval_ms": 1,
+      "report_retry_ticks": 33,
+      "active_sensor_interval_ms": 6,
+      "gyro_counts_per_dps": 16
+    }
+  }
+}

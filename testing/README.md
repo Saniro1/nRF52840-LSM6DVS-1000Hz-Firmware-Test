@@ -118,3 +118,7 @@ timestep warning hidden) but the two aiming axes are reversed. Mapping `-1,-0,+2
 
 ## fix34 - flipped handheld, deadzone back to 0.25
 `CURRENT_1_gyro-accel-fix34-ds4-handheld-flipped-dz0.25-gain1.0x-nowarn.uf2`: same as fix33 (mapping `+1,+0,+2`, 1x gain, timestep warning hidden) with the deadzone lowered from 0.5 to **0.25 deg/s**.
+
+Fix36 diagnostic builds and physical A/B instructions: [DS4_FIX36](../docs/DS4_FIX36.md).
+These restore historical timing and SDL nominal gyro units; they are not verified
+1000 Hz or calibration fixes.

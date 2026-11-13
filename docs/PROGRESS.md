@@ -39,3 +39,9 @@ USB queue retries. ARM emulation and capture-analysis tests pass locally. Existi
 calibration machinery is retained; new gyro bias algorithms/source rebuild remain
 unfinished. Hardware calibration and measured 1000Hz throughput are pending.
 See [DS4_FIX35.md](DS4_FIX35.md) for evidence and limitations.
+
+## Fix36 independent review
+
+See DS4_FIX36.md for the SDL unit discrepancy, descriptor feature gap, clock/ABI
+and shared-buffer audit, conservative three-variant diagnostic builds and open
+hardware requirements. No reset/noise root cause or 1000 Hz result is claimed.

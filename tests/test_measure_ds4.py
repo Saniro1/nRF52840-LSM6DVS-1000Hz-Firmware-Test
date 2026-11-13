@@ -17,8 +17,20 @@ class CaptureTests(unittest.TestCase):
             r=summary(rows)
             self.assertAlmostEqual(r['arrival_hz'],hz)
             self.assertAlmostEqual(r['gravity_mean_g'],1)
-            self.assertAlmostEqual(r['gyro_mean_dps'][0],16384*2000/32767)
+            self.assertAlmostEqual(r['gyro_mean_dps'][0],16384/16)
             self.assertEqual(r['counter_discontinuities'],0)
+    def test_stationary_axis_noise_retains_gravity(self):
+        rows=[]
+        for i,offset in enumerate((-8,8,-8,8)):
+            packet=bytearray(64);packet[0]=1
+            struct.pack_into('<3h',packet,19,offset,-8192,0)
+            rows.append((i*1000000,bytes(packet)))
+        result=summary(rows)
+        self.assertEqual(result['accel_mean_g'],[0,-1,0])
+        self.assertEqual(result['accel_stddev_g'],[8/8192,0,0])
+        self.assertEqual(result['accel_peak_to_peak_g'],[16/8192,0,0])
+        self.assertGreaterEqual(result['gravity_mean_g'],1)
+
     def test_invalid_reports_do_not_pass(self):
         for b in (b'',b'\x01'*65,b'\x00'*64):
             with self.assertRaises(ValueError):decode(b)
