@@ -52,3 +52,10 @@ Recovered upstream reference cbfff16ebed1659d4c0e9f361ded0030fb66855a and matche
 compiled LSM6DSV FIFO paths. Added guarded rejection of failed FIFO reads and
 coherent converter publication/report snapshots. See DS4_FIX37.md for executed
 failure-injection tests, limitations and recovery. Physical noise remains unverified.
+
+## Fix38 acceleration bandwidth experiment
+
+Fix37 stationary acceleration remains noisy in the user's screenshot. Added a
+separate LSM6DSV hardware LPF2 ODR/20 test build, preserving gravity and all mappings.
+See DS4_FIX38.md for source references, latency/settling tradeoffs and limitations.
+No physical noise reduction, calibration success or 1000 Hz result is claimed.

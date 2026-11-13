@@ -1,0 +1,58 @@
+{
+  "base_sha256": "ca788b4a19e95cceaf0e210c18ba4675904f3bf140129ce91b06c3c4905dc45e",
+  "hardware_validated": false,
+  "purpose": "experimental accelerometer hardware bandwidth limit; no physical noise validation",
+  "writer_cave": 707584,
+  "writer_bytes": 34,
+  "fifo_cave": 707712,
+  "fifo_bytes": 10,
+  "profiles": {
+    "normal": {
+      "file": "fix38-ds4-normal.uf2",
+      "mapping": "+1,-2,-0",
+      "deadzone_dps": 0,
+      "gain": 1,
+      "cave_bytes": 550,
+      "sha256": "2f22c5da81900947ab431d88c90698ef7f71c9f265a8725db9a47df9e9c3dd0a",
+      "usb_interval_ms": 1,
+      "report_retry_ticks": 33,
+      "active_sensor_interval_ms": 6,
+      "gyro_counts_per_dps": 16,
+      "sensor_handoff": "PRIMASK writer and stack snapshot",
+      "fifo_error_returns_zero": true
+    },
+    "inverted": {
+      "file": "fix38-ds4-inverted.uf2",
+      "mapping": "-1,-2,+0",
+      "deadzone_dps": 0,
+      "gain": 1,
+      "cave_bytes": 550,
+      "sha256": "719ffc17c2f227611c12a7462ccaddbad7a0de38ffba385bd2b43ca0d2a6ae4c",
+      "usb_interval_ms": 1,
+      "report_retry_ticks": 33,
+      "active_sensor_interval_ms": 6,
+      "gyro_counts_per_dps": 16,
+      "sensor_handoff": "PRIMASK writer and stack snapshot",
+      "fifo_error_returns_zero": true
+    },
+    "handheld": {
+      "file": "fix38-ds4-handheld.uf2",
+      "mapping": "+1,+0,-2",
+      "deadzone_dps": 0,
+      "gain": 1,
+      "cave_bytes": 546,
+      "sha256": "66e399ca53e99d7404ecfb16fbdcf0dacea6ec1705873bf7a266a746c9f29047",
+      "usb_interval_ms": 1,
+      "report_retry_ticks": 33,
+      "active_sensor_interval_ms": 6,
+      "gyro_counts_per_dps": 16,
+      "sensor_handoff": "PRIMASK writer and stack snapshot",
+      "fifo_error_returns_zero": true
+    }
+  },
+  "filter_cave": 707840,
+  "filter_bytes": 82,
+  "accel_lpf2": true,
+  "accel_bandwidth": "actual accel ODR / 20",
+  "accel_high_pass": false
+}

@@ -125,3 +125,6 @@ These restore historical timing and SDL nominal gyro units; they are not verifie
 
 Fix37 diagnostic builds: [FIFO error and coherent sensor handoff repair](../docs/DS4_FIX37.md).
 No stationary-noise, calibration or 1000 Hz success is claimed.
+
+Fix38: [hardware accelerometer LPF2 bandwidth experiment](../docs/DS4_FIX38.md).
+Adds lag and depends on actual sensor ODR; physical noise reduction is unverified.
