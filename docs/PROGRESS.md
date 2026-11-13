@@ -85,3 +85,11 @@ User explicitly requested 0.10 deadzone after fix40. Added a 0.10 degrees/s per-
 soft deadzone at float converter input, after bias correction, for all three
 variants. Acceleration is unchanged. See DS4_FIX41.md for exact behavior, integer
 quantization and validation limits.
+
+## Fix42 DS4 HID report scheduling
+
+User confirms fix41 motion behavior and requests full 1000 Hz DS4 HID throughput.
+Retain motion code; reduce USB retry from 33 to 8 ticks and repair retained guard
+on failed HID submission. New tests execute the full DS4 report loop and completion
+callback, including 3000 virtual cycles. See DS4_FIX42.md. Hardware throughput,
+stability and 1000 Hz remain unmeasured; acceleration batching is unchanged.

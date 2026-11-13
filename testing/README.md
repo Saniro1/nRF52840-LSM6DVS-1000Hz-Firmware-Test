@@ -140,3 +140,7 @@ zero-drift or measured 1000 Hz result is claimed.
 
 Fix41: [user-requested 0.10 degrees/s soft gyro deadzone](../docs/DS4_FIX41.md).
 Applied after runtime bias correction; acceleration remains unchanged.
+
+Fix42: [DS4 HID 1000 reports/s scheduling candidate](../docs/DS4_FIX42.md).
+Preserves fix41 motion, speeds up retries, and recovers the guard after submission
+errors. Real sustained USB rate remains unmeasured; this is not 1000 fresh IMU samples/s.
