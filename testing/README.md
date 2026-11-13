@@ -137,3 +137,6 @@ Fix40: [VQF runtime gyro-bias correction](../docs/DS4_FIX40.md). Retains fix39
 acceleration. Requires VQF selection; relearns volatile fusion state after restart.
 Leave stationary after warm-up and redo old host gyro offsets. No physical
 zero-drift or measured 1000 Hz result is claimed.
+
+Fix41: [user-requested 0.10 degrees/s soft gyro deadzone](../docs/DS4_FIX41.md).
+Applied after runtime bias correction; acceleration remains unchanged.

@@ -78,3 +78,10 @@ reference filter; reinitialize retained volatile VQF state so old coefficients
 cannot override it. Physical calibration and fix39 acceleration are retained.
 Actual compiled VQF convergence is tested with synthetic 120/1920 Hz inputs.
 See DS4_FIX40.md for results, slow-rotation/retained-state tradeoffs and limits.
+
+## Fix41 requested gyro deadzone
+
+User explicitly requested 0.10 deadzone after fix40. Added a 0.10 degrees/s per-axis
+soft deadzone at float converter input, after bias correction, for all three
+variants. Acceleration is unchanged. See DS4_FIX41.md for exact behavior, integer
+quantization and validation limits.
