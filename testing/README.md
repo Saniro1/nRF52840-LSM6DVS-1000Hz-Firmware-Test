@@ -132,3 +132,8 @@ Adds lag and depends on actual sensor ODR; physical noise reduction is unverifie
 Fix39: [calibrated acceleration batch mean](../docs/DS4_FIX39.md). Keeps gravity and
 mappings, but acceleration updates once per collection batch (nominally ~167 Hz).
 Physical noise reduction and 1000 USB reports/s remain unverified.
+
+Fix40: [VQF runtime gyro-bias correction](../docs/DS4_FIX40.md). Retains fix39
+acceleration. Requires VQF selection; relearns volatile fusion state after restart.
+Leave stationary after warm-up and redo old host gyro offsets. No physical
+zero-drift or measured 1000 Hz result is claimed.

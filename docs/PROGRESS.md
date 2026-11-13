@@ -68,3 +68,13 @@ Keep gyro behavior, gravity, mappings and prior fixes. Tests execute accumulatio
 calibration, averaging and publication. See DS4_FIX39.md for the explicit roughly
 6 ms window/167 Hz nominal acceleration-publication tradeoff. Physical noise and
 1000 Hz remain unverified.
+
+## Fix40 gyro runtime bias correction
+
+User reports fix39 acceleration is more stable and requests stationary gyro-drift
+repair. Route the existing VQF estimate (rad/s) into a private degree/s HID gyro
+copy. Address high-rate single-precision rest-reference behavior with a 0.1 s
+reference filter; reinitialize retained volatile VQF state so old coefficients
+cannot override it. Physical calibration and fix39 acceleration are retained.
+Actual compiled VQF convergence is tested with synthetic 120/1920 Hz inputs.
+See DS4_FIX40.md for results, slow-rotation/retained-state tradeoffs and limits.
