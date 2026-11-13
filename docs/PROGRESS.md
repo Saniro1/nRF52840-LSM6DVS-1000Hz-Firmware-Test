@@ -59,3 +59,12 @@ Fix37 stationary acceleration remains noisy in the user's screenshot. Added a
 separate LSM6DSV hardware LPF2 ODR/20 test build, preserving gravity and all mappings.
 See DS4_FIX38.md for source references, latency/settling tradeoffs and limitations.
 No physical noise reduction, calibration success or 1000 Hz result is claimed.
+
+## Fix39 acceleration batch mean
+
+After user-authorized continuation, route the existing calibrated FIFO batch mean
+to HID acceleration instead of publishing each individual acceleration record.
+Keep gyro behavior, gravity, mappings and prior fixes. Tests execute accumulation,
+calibration, averaging and publication. See DS4_FIX39.md for the explicit roughly
+6 ms window/167 Hz nominal acceleration-publication tradeoff. Physical noise and
+1000 Hz remain unverified.

@@ -1,0 +1,62 @@
+{
+  "base_sha256": "ca788b4a19e95cceaf0e210c18ba4675904f3bf140129ce91b06c3c4905dc45e",
+  "hardware_validated": false,
+  "purpose": "experimental valid FIFO batch mean for HID acceleration; no physical noise validation",
+  "writer_cave": 707584,
+  "writer_bytes": 34,
+  "fifo_cave": 707712,
+  "fifo_bytes": 10,
+  "profiles": {
+    "normal": {
+      "file": "fix39-ds4-normal.uf2",
+      "mapping": "+1,-2,-0",
+      "deadzone_dps": 0,
+      "gain": 1,
+      "cave_bytes": 550,
+      "sha256": "89bbfd158ede5df55e336d62447e1cee064304e04a652f756c2fde55abcbeae6",
+      "usb_interval_ms": 1,
+      "report_retry_ticks": 33,
+      "active_sensor_interval_ms": 6,
+      "gyro_counts_per_dps": 16,
+      "sensor_handoff": "PRIMASK writer and stack snapshot",
+      "fifo_error_returns_zero": true
+    },
+    "inverted": {
+      "file": "fix39-ds4-inverted.uf2",
+      "mapping": "-1,-2,+0",
+      "deadzone_dps": 0,
+      "gain": 1,
+      "cave_bytes": 550,
+      "sha256": "2cf12185d19c7fe8994633bc55bad604ab71d372c5c5725d32f9f016f53f73ba",
+      "usb_interval_ms": 1,
+      "report_retry_ticks": 33,
+      "active_sensor_interval_ms": 6,
+      "gyro_counts_per_dps": 16,
+      "sensor_handoff": "PRIMASK writer and stack snapshot",
+      "fifo_error_returns_zero": true
+    },
+    "handheld": {
+      "file": "fix39-ds4-handheld.uf2",
+      "mapping": "+1,+0,-2",
+      "deadzone_dps": 0,
+      "gain": 1,
+      "cave_bytes": 546,
+      "sha256": "faad509641918f5d1bf5c605fcf87cf7bdf10ca1deddac9ddf6a4e8d20e10e10",
+      "usb_interval_ms": 1,
+      "report_retry_ticks": 33,
+      "active_sensor_interval_ms": 6,
+      "gyro_counts_per_dps": 16,
+      "sensor_handoff": "PRIMASK writer and stack snapshot",
+      "fifo_error_returns_zero": true
+    }
+  },
+  "filter_cave": 707840,
+  "filter_bytes": 82,
+  "accel_lpf2": true,
+  "accel_bandwidth": "actual accel ODR / 20",
+  "accel_high_pass": false,
+  "mean_cave": 708096,
+  "mean_bytes": 50,
+  "accel_publication": "calibrated mean of valid acceleration samples per FIFO batch",
+  "accel_publication_period": "existing collection interval; nominally 6 ms in low-noise mode"
+}

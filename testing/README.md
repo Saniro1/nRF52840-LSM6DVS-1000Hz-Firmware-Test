@@ -128,3 +128,7 @@ No stationary-noise, calibration or 1000 Hz success is claimed.
 
 Fix38: [hardware accelerometer LPF2 bandwidth experiment](../docs/DS4_FIX38.md).
 Adds lag and depends on actual sensor ODR; physical noise reduction is unverified.
+
+Fix39: [calibrated acceleration batch mean](../docs/DS4_FIX39.md). Keeps gravity and
+mappings, but acceleration updates once per collection batch (nominally ~167 Hz).
+Physical noise reduction and 1000 USB reports/s remain unverified.
